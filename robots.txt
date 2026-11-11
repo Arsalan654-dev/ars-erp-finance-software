@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /email-setting/
+Disallow: /chatbot-setting/
+Disallow: /payment-gateway/
+Disallow: /payment-link/
+Disallow: /country/
+Disallow: /state/
+Disallow: /product/
+Disallow: /order/
+Disallow: /dashboard
+
+Sitemap: https://autoscheckpro.com/sitemap.xml
