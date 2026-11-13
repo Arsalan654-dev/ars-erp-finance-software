@@ -9,6 +9,7 @@ use App\Models\WhatsappAccount;
 use App\Services\AuditService;
 use App\Services\WhatsAppService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class WhatsAppWebhookController extends Controller
 {
@@ -49,7 +50,7 @@ class WhatsAppWebhookController extends Controller
 
             return response()->json(['status' => 'ok']);
         } catch (\Throwable $e) {
-            \Illuminate\Support\Facades\Log::error('WhatsApp webhook error: '.$e->getMessage());
+            Log::error('WhatsApp webhook error: '.$e->getMessage());
 
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
         }
@@ -102,11 +103,11 @@ class WhatsAppWebhookController extends Controller
         }
 
         $message = match ($data['template']) {
-            'quotation' => "Hello {$client->business_name}, your quotation {$data['reference']} is ready from Consultiser. Please check your email or contact us for details.",
-            'invoice' => "Hello {$client->business_name}, invoice {$data['reference']} has been issued by Consultiser. Thank you for your business.",
+            'quotation' => "Hello {$client->business_name}, your quotation {$data['reference']} is ready from ARS ERP. Please check your email or contact us for details.",
+            'invoice' => "Hello {$client->business_name}, invoice {$data['reference']} has been issued by ARS ERP. Thank you for your business.",
             'payment' => "Hello {$client->business_name}, we received your payment. Thank you!",
-            'renewal' => "Hello {$client->business_name}, a reminder that your document is due for renewal. Please contact Consultiser.",
-            default => "Hello {$client->business_name}, a message from Consultiser.",
+            'renewal' => "Hello {$client->business_name}, a reminder that your document is due for renewal. Please contact ARS ERP.",
+            default => "Hello {$client->business_name}, a message from ARS ERP.",
         };
 
         $sent = WhatsAppService::send($client->phone, $message);

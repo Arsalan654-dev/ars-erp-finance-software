@@ -30,7 +30,7 @@
                         <label class="ks-form-label">Email Address</label>
                         <div style="position:relative;">
                             <i class="ti ti-mail" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:15px;"></i>
-                            <input type="email" name="email" value="{{ old('email') }}" required autofocus class="ks-form-input" style="padding-left:38px;" placeholder="you@consultiser.com">
+                            <input type="email" name="email" value="{{ old('email') }}" required autofocus class="ks-form-input" style="padding-left:38px;" placeholder="you@example.com">
                         </div>
                     </div>
 

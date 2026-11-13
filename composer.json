@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "ars/ars-erp-finance-software",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "ARS ERP Finance Software — finance, operations and compliance ERP.",
     "keywords": [
         "laravel",
         "framework"

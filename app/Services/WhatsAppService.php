@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Client;
+use App\Models\Lead;
 use App\Models\WhatsappAccount;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -42,12 +44,14 @@ class WhatsAppService
 
             if (! $response->successful()) {
                 Log::warning('WhatsApp send failed', ['status' => $response->status(), 'body' => $response->json(), 'account' => $account->name]);
+
                 return false;
             }
 
             return true;
         } catch (\Throwable $e) {
             Log::error('WhatsApp send error: '.$e->getMessage(), ['account' => $account->name]);
+
             return false;
         }
     }
@@ -68,6 +72,7 @@ class WhatsAppService
 
         if (! $response->successful()) {
             Log::warning('Evolution send failed', ['status' => $response->status(), 'body' => $response->json()]);
+
             return false;
         }
 
@@ -105,20 +110,20 @@ class WhatsAppService
                 ]);
 
                 if ($from) {
-                    $existingClient = \App\Models\Client::where('phone', 'like', "%{$from}%")->first();
+                    $existingClient = Client::where('phone', 'like', "%{$from}%")->first();
                     if (! $existingClient) {
-                        $existingLead = \App\Models\Lead::where('phone', 'like', "%{$from}%")
+                        $existingLead = Lead::where('phone', 'like', "%{$from}%")
                             ->whereIn('status', ['new', 'contacted', 'qualified'])
                             ->first();
 
                         if (! $existingLead) {
-                            $client = \App\Models\Client::create([
+                            $client = Client::create([
                                 'phone' => $from,
                                 'business_name' => 'WhatsApp Lead',
                                 'status' => 'lead',
                             ]);
 
-                            \App\Models\Lead::create([
+                            Lead::create([
                                 'client_id' => $client->id,
                                 'source' => 'whatsapp',
                                 'phone' => $from,
@@ -143,7 +148,7 @@ class WhatsAppService
 
                 // Auto-reply if configured
                 if ($from && $text && $account) {
-                    self::send($from, "Thank you for your message. Consultiser has received it and will respond shortly.", $account);
+                    self::send($from, 'Thank you for your message. ARS ERP has received it and will respond shortly.', $account);
                 }
             }
         }

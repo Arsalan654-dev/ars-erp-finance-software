@@ -1,4 +1,4 @@
-{{-- Consultiser ERP — always-visible pagination --}}
+{{-- ARS ERP Finance Software — always-visible pagination --}}
 @if ($paginator->hasPages() || true)
  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
   {{-- Info --}}

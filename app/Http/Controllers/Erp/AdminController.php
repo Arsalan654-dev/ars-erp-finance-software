@@ -450,8 +450,8 @@ class AdminController extends Controller
             'username' => '',
             'password' => '',
             'encryption' => 'tls',
-            'from_address' => 'noreply@consultiser.com',
-            'from_name' => 'Consultiser ERP',
+            'from_address' => config('mail.from.address', 'noreply@example.com'),
+            'from_name' => config('mail.from.name', config('erp.app_name')),
             'is_active' => true,
         ]);
 
@@ -501,7 +501,7 @@ class AdminController extends Controller
 
         try {
             Mail::raw(
-                "This is a test email from Consultiser ERP.\n\n".
+                "This is a test email from ARS ERP Finance Software.\n\n".
                 'Sent at: '.now()->format('Y-m-d H:i:s')."\n".
                 "SMTP Host: {$emailSetting->host}\n".
                 "Port: {$emailSetting->port}\n".
@@ -510,7 +510,7 @@ class AdminController extends Controller
                 'If you received this, your email configuration is working correctly.',
                 function ($message) use ($emailSetting): void {
                     $message->to($emailSetting->from_address, 'Admin')
-                        ->subject('Test Email — Consultiser ERP');
+                        ->subject('Test Email — ARS ERP Finance Software');
                 }
             );
 

@@ -17,12 +17,15 @@ use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use App\Models\KpiDefinition;
 use App\Models\KpiTarget;
+use App\Models\LeaveRequest;
 use App\Models\LedgerAccount;
 use App\Models\LedgerEntry;
 use App\Models\Notification;
+use App\Models\Payment;
 use App\Models\PayrollRecord;
 use App\Models\Quotation;
 use App\Models\QuotationItem;
+use App\Models\Role;
 use App\Models\Task;
 use App\Models\TaskAssignment;
 use App\Models\TaskComment;
@@ -43,19 +46,19 @@ class ErpDemoDataSeeder extends Seeder
         // 1. USERS (add 5 more → 10 total, 2 per role)
         // ──────────────────────────────────────────────
         $roles = [
-            'super_admin' => \App\Models\Role::where('name', 'super_admin')->first(),
-            'hr' => \App\Models\Role::where('name', 'hr')->first(),
-            'finance' => \App\Models\Role::where('name', 'finance')->first(),
-            'csr_manager' => \App\Models\Role::where('name', 'csr_manager')->first(),
-            'team_associate' => \App\Models\Role::where('name', 'team_associate')->first(),
+            'super_admin' => Role::where('name', 'super_admin')->first(),
+            'hr' => Role::where('name', 'hr')->first(),
+            'finance' => Role::where('name', 'finance')->first(),
+            'csr_manager' => Role::where('name', 'csr_manager')->first(),
+            'team_associate' => Role::where('name', 'team_associate')->first(),
         ];
 
         $extraUsers = [
-            ['name' => 'Senior HR Officer', 'email' => 'hr2@consultiser.com', 'password' => 'hr12345', 'phone' => '+1-555-0201', 'department' => 'Human Resources', 'designation' => 'Senior HR Officer', 'role' => 'hr'],
-            ['name' => 'Accounts Executive', 'email' => 'finance2@consultiser.com', 'password' => 'finance123', 'phone' => '+1-555-0202', 'department' => 'Finance', 'designation' => 'Accounts Executive', 'role' => 'finance'],
-            ['name' => 'Operations Lead', 'email' => 'csr2@consultiser.com', 'password' => 'csr12345', 'phone' => '+1-555-0203', 'department' => 'Operations', 'designation' => 'Operations Lead', 'role' => 'csr_manager'],
-            ['name' => 'US Tax Associate', 'email' => 'associate2@consultiser.com', 'password' => 'assoc123', 'phone' => '+1-555-0204', 'department' => 'US TAX', 'designation' => 'US Tax Associate', 'role' => 'team_associate'],
-            ['name' => 'UK Tax Associate', 'email' => 'associate3@consultiser.com', 'password' => 'assoc123', 'phone' => '+1-555-0205', 'department' => 'UK TAX', 'designation' => 'UK Tax Associate', 'role' => 'team_associate'],
+            ['name' => 'Senior HR Officer', 'email' => 'hr2@example.com', 'password' => 'hr12345', 'phone' => '+1-555-0201', 'department' => 'Human Resources', 'designation' => 'Senior HR Officer', 'role' => 'hr'],
+            ['name' => 'Accounts Executive', 'email' => 'finance2@example.com', 'password' => 'finance123', 'phone' => '+1-555-0202', 'department' => 'Finance', 'designation' => 'Accounts Executive', 'role' => 'finance'],
+            ['name' => 'Operations Lead', 'email' => 'csr2@example.com', 'password' => 'csr12345', 'phone' => '+1-555-0203', 'department' => 'Operations', 'designation' => 'Operations Lead', 'role' => 'csr_manager'],
+            ['name' => 'US Tax Associate', 'email' => 'associate2@example.com', 'password' => 'assoc123', 'phone' => '+1-555-0204', 'department' => 'US TAX', 'designation' => 'US Tax Associate', 'role' => 'team_associate'],
+            ['name' => 'UK Tax Associate', 'email' => 'associate3@example.com', 'password' => 'assoc123', 'phone' => '+1-555-0205', 'department' => 'UK TAX', 'designation' => 'UK Tax Associate', 'role' => 'team_associate'],
         ];
 
         foreach ($extraUsers as $u) {
@@ -74,16 +77,16 @@ class ErpDemoDataSeeder extends Seeder
         }
 
         // Reference users
-        $admin = User::where('email', 'admin@consultiser.com')->first();
-        $hr = User::where('email', 'hr@consultiser.com')->first();
-        $finance = User::where('email', 'finance@consultiser.com')->first();
-        $csr = User::where('email', 'csr@consultiser.com')->first();
-        $associate = User::where('email', 'associate@consultiser.com')->first();
-        $hr2 = User::where('email', 'hr2@consultiser.com')->first();
-        $finance2 = User::where('email', 'finance2@consultiser.com')->first();
-        $csr2 = User::where('email', 'csr2@consultiser.com')->first();
-        $associate2 = User::where('email', 'associate2@consultiser.com')->first();
-        $associate3 = User::where('email', 'associate3@consultiser.com')->first();
+        $admin = User::where('email', 'admin@example.com')->first();
+        $hr = User::where('email', 'hr@example.com')->first();
+        $finance = User::where('email', 'finance@example.com')->first();
+        $csr = User::where('email', 'csr@example.com')->first();
+        $associate = User::where('email', 'associate@example.com')->first();
+        $hr2 = User::where('email', 'hr2@example.com')->first();
+        $finance2 = User::where('email', 'finance2@example.com')->first();
+        $csr2 = User::where('email', 'csr2@example.com')->first();
+        $associate2 = User::where('email', 'associate2@example.com')->first();
+        $associate3 = User::where('email', 'associate3@example.com')->first();
 
         $team = [$associate, $associate2, $associate3];
 
@@ -451,7 +454,7 @@ class ErpDemoDataSeeder extends Seeder
                 $days = rand(1, 3);
                 $start = now()->subMonths(rand(0, 2))->addDays(rand(2, 20));
                 $leaveStatus = ['pending', 'approved', 'rejected'][rand(0, 2)];
-                \App\Models\LeaveRequest::firstOrCreate(
+                LeaveRequest::firstOrCreate(
                     ['employee_id' => $emp->id, 'start_date' => $start->toDateString()],
                     [
                         'type' => $type,
@@ -561,7 +564,7 @@ class ErpDemoDataSeeder extends Seeder
                 continue;
             }
             Notification::firstOrCreate(
-                ['user_id' => $u->id, 'title' => 'Welcome to Consultiser ERP'],
+                ['user_id' => $u->id, 'title' => 'Welcome to ARS ERP Finance Software'],
                 ['type' => 'system', 'body' => 'Your account is active. Explore your dashboard.', 'is_read' => true]
             );
             if (rand(0, 1)) {
@@ -613,16 +616,16 @@ class ErpDemoDataSeeder extends Seeder
         $this->command->info('✅ Demo data seeded successfully!');
         $this->command->info('');
         $this->command->info('━━━ LOGIN CREDENTIALS ━━━');
-        $this->command->info('  Super Admin  →  admin@consultiser.com      /  admin123');
-        $this->command->info('  HR Manager   →  hr@consultiser.com         /  hr12345');
-        $this->command->info('  Finance      →  finance@consultiser.com    /  finance123');
-        $this->command->info('  CSR Manager  →  csr@consultiser.com        /  csr12345');
-        $this->command->info('  Associate    →  associate@consultiser.com  /  assoc123');
-        $this->command->info('  HR (2nd)     →  hr2@consultiser.com        /  hr12345');
-        $this->command->info('  Finance (2nd) → finance2@consultiser.com   /  finance123');
-        $this->command->info('  CSR (2nd)    →  csr2@consultiser.com       /  csr12345');
-        $this->command->info('  US Tax Asso  →  associate2@consultiser.com /  assoc123');
-        $this->command->info('  UK Tax Asso  →  associate3@consultiser.com /  assoc123');
+        $this->command->info('  Super Admin  →  admin@example.com      /  admin123');
+        $this->command->info('  HR Manager   →  hr@example.com         /  hr12345');
+        $this->command->info('  Finance      →  finance@example.com    /  finance123');
+        $this->command->info('  CSR Manager  →  csr@example.com        /  csr12345');
+        $this->command->info('  Associate    →  associate@example.com  /  assoc123');
+        $this->command->info('  HR (2nd)     →  hr2@example.com        /  hr12345');
+        $this->command->info('  Finance (2nd) → finance2@example.com   /  finance123');
+        $this->command->info('  CSR (2nd)    →  csr2@example.com       /  csr12345');
+        $this->command->info('  US Tax Asso  →  associate2@example.com /  assoc123');
+        $this->command->info('  UK Tax Asso  →  associate3@example.com /  assoc123');
         $this->command->info('');
         $this->command->info('Seeded: '.count($clients).' clients, 22 quotations, 22 invoices, 22 tasks, 22 compliance, 10 employees, 30 payroll records, 15 expenses, KPI + audit data.');
     }
@@ -633,7 +636,7 @@ class ErpDemoDataSeeder extends Seeder
     private function createPayment($invoice, $amount, $recordedBy, $verifiedBy, $date, $verified = true)
     {
         $rate = $invoice->currency === 'USD' ? 278.5 : ($invoice->currency === 'GBP' ? 356.2 : 302.4);
-        $payment = \App\Models\Payment::firstOrCreate(
+        $payment = Payment::firstOrCreate(
             ['payment_number' => 'PAY-'.str_pad((string) (1000 + $invoice->id), 5, '0', STR_PAD_LEFT)],
             [
                 'client_id' => $invoice->client_id,

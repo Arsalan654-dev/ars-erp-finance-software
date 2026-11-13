@@ -46,7 +46,7 @@
 
    <div>
     <label class="ks-label">Verify Token</label>
-    <input type="text" name="verify_token" value="{{ old('verify_token') }}" class="ks-form-input" placeholder="consultiser-verify (or your custom token)">
+    <input type="text" name="verify_token" value="{{ old('verify_token') }}" class="ks-form-input" placeholder="ars-erp-verify (or your custom token)">
     <p style="font-size:11px;color:var(--gray-400);margin-top:4px;">Used for webhook verification. Must match what you set in Meta/Evolution dashboard.</p>
    </div>
 

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Consultiser ERP — Kanakku-inspired Theme (FULLY RESPONSIVE)
+   ARS ERP Finance Software — Kanakku-inspired Theme (FULLY RESPONSIVE)
    Design language adapted from Kanakku (Dreams Technologies) template.
    Role colors preserved via CSS variables (--role-*) set on [data-role].
    Fully responsive for: xs(320px), sm(375px), md(768px), lg(992px), xl(1200px), 2xl(1536px+)
@@ -7,9 +7,9 @@
 
 /* ===== CSS Variables ===== */
 :root, [data-role="admin"] {
-    --primary: #F43F1E;
-    --primary-dark: #C91F32;
-    --primary-light: #FF6A1A;
+    --primary: #0B1F3A;
+    --primary-dark: #071426;
+    --primary-light: #10B981;
     --sidebar-bg: #ffffff;
     --sidebar-width: 276px;
     --sidebar-width-sm: 70px;

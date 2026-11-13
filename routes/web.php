@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Consultiser ERP — Web Routes
+| ARS ERP Finance Software — Web Routes
 |--------------------------------------------------------------------------
 */
 
