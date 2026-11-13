@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="icon" type="image/png" href="{{ asset('erp-assets/consultisor-logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('erp-assets/ars-erp-icon.png') }}">
     <link rel="stylesheet" href="{{ asset('erp-assets/kanakku-theme.css') }}?v=8">
 
     {{-- Tailwind CDN — kept for compatibility with all module views --}}
@@ -20,7 +20,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { crimson: '#A91E3B', red: '#C91F32', coral: '#F43F1E', orange: '#FF6A1A', amber: '#FF9D18' },
+                        brand: { crimson: '#0B1F3A', red: '#047857', coral: '#10B981', orange: '#F59E0B', amber: '#FBBF24' },
                         ink: { DEFAULT: '#111111', light: '#151515', lighter: '#181818' },
                         paper: { DEFAULT: '#F8F8F7', alt: '#FAFAF9' },
                     },
@@ -87,15 +87,15 @@
     <style>
         /* ===== Role-based theme (CSS variables) ===== */
         :root, [data-role="admin"] {
-            --role-grad-1: #C91F32;   --role-grad-2: #F43F1E;   --role-grad-3: #FF6A1A;   --role-grad-4: #FF9D18;
-            --role-accent: #F43F1E;   --role-accent-strong: #C91F32;   --role-accent-soft: rgba(244,63,30,0.14);
+            --role-grad-1: #0B1F3A;   --role-grad-2: #10B981;   --role-grad-3: #059669;   --role-grad-4: #F59E0B;
+            --role-accent: #10B981;   --role-accent-strong: #0B1F3A;   --role-accent-soft: rgba(16,185,129,0.14);
         }
         [data-role="hr"],
         [data-role="finance"],
         [data-role="csr"],
         [data-role="associate"] {
-            --role-grad-1: #C91F32;   --role-grad-2: #F43F1E;   --role-grad-3: #FF6A1A;   --role-grad-4: #FF9D18;
-            --role-accent: #F43F1E;   --role-accent-strong: #C91F32;   --role-accent-soft: rgba(244,63,30,0.14);
+            --role-grad-1: #0B1F3A;   --role-grad-2: #10B981;   --role-grad-3: #059669;   --role-grad-4: #F59E0B;
+            --role-accent: #10B981;   --role-accent-strong: #0B1F3A;   --role-accent-soft: rgba(16,185,129,0.14);
         }
         .consultiser-gradient {
             background-image: linear-gradient(135deg, var(--role-grad-1) 0%, var(--role-grad-2) 40%, var(--role-grad-3) 70%, var(--role-grad-4) 100%);
@@ -133,10 +133,10 @@
     {{-- Pre-loader Skeleton --}}
     <div id="app-preloader">
         <div class="preloader-logo">
-            <img alt="Consultiser" class="w-full h-full object-contain" src="{{ asset('erp-assets/consultisor-logo.png') }}"/>
+            <img alt="ARS ERP Finance Software" class="w-full h-full object-contain" src="{{ asset('erp-assets/ars-erp-icon.png') }}"/>
         </div>
         <div class="text-center">
-            <div class="preloader-brand">Consultiser <span class="consultiser-gradient-text">ERP</span></div>
+            <div class="preloader-brand">ARS ERP <span class="consultiser-gradient-text">Finance Software</span></div>
             <div class="text-[11px] text-gray-400 mt-1 tracking-widest uppercase" style="font-size:11px;color:#9aa0ae;letter-spacing:0.12em;">Loading workspace…</div>
         </div>
         <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
@@ -170,8 +170,8 @@
         <aside class="ks-sidebar" :class="{'ks-sidebar-collapsed': collapsed, 'ks-mobile-open': mobileOpen}">
             <div class="ks-sidebar-logo">
                 <a href="{{ route('erp.dashboard') }}" class="d-flex align-items-center gap-2" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-                    <img alt="Consultiser" src="{{ asset('erp-assets/consultisor-logo.png') }}"/>
-                    <span class="ks-logo-text ks-collapsed-hide">Consultiser <span class="consultiser-gradient-text">ERP</span></span>
+                    <img alt="ARS ERP Finance Software" src="{{ asset('erp-assets/ars-erp-icon.png') }}"/>
+                    <span class="ks-logo-text ks-collapsed-hide">ARS ERP <span class="consultiser-gradient-text">Finance Software</span></span>
                 </a>
                 <button class="ks-sidebar-close lg-show" x-on:click="mobileOpen = false" aria-label="Close sidebar" style="display:none;">
                     <i class="ti ti-x" style="font-size:20px;"></i>
@@ -366,7 +366,7 @@
                 <h3 style="font-size:20px;font-weight:700;color:#111;margin-bottom:10px;">Access Denied</h3>
                 <p style="font-size:14px;color:#6f7180;margin-bottom:0;line-height:1.6;">You do not have permission to access this.<br>Please contact your administrator.</p>
                 <div style="margin-top:28px;">
-                    <button @click="show = false" style="width:100%;padding:12px 24px;border-radius:10px;background:linear-gradient(120deg,#C91F32,#FF6A1A);color:#fff;font-size:15px;font-weight:600;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(201,31,50,0.3);">Got it</button>
+                    <button @click="show = false" style="width:100%;padding:12px 24px;border-radius:10px;background:linear-gradient(120deg,#0B1F3A,#059669);color:#fff;font-size:15px;font-weight:600;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(201,31,50,0.3);">Got it</button>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@ class ErpUserSeeder extends Seeder
     public function run(): void
     {
         $admin = User::firstOrCreate(
-            ['email' => 'admin@consultiser.com'],
+            ['email' => 'admin@example.com'],
             [
                 'name' => 'Super Admin',
                 'password' => Hash::make('admin123'),
@@ -25,7 +25,7 @@ class ErpUserSeeder extends Seeder
         $admin->roles()->sync([Role::where('name', 'super_admin')->first()->id]);
 
         $hr = User::firstOrCreate(
-            ['email' => 'hr@consultiser.com'],
+            ['email' => 'hr@example.com'],
             [
                 'name' => 'HR Manager',
                 'password' => Hash::make('hr12345'),
@@ -38,7 +38,7 @@ class ErpUserSeeder extends Seeder
         $hr->roles()->sync([Role::where('name', 'hr')->first()->id]);
 
         $finance = User::firstOrCreate(
-            ['email' => 'finance@consultiser.com'],
+            ['email' => 'finance@example.com'],
             [
                 'name' => 'Finance Officer',
                 'password' => Hash::make('finance123'),
@@ -51,7 +51,7 @@ class ErpUserSeeder extends Seeder
         $finance->roles()->sync([Role::where('name', 'finance')->first()->id]);
 
         $csr = User::firstOrCreate(
-            ['email' => 'csr@consultiser.com'],
+            ['email' => 'csr@example.com'],
             [
                 'name' => 'CSR Manager',
                 'password' => Hash::make('csr12345'),
@@ -64,7 +64,7 @@ class ErpUserSeeder extends Seeder
         $csr->roles()->sync([Role::where('name', 'csr_manager')->first()->id]);
 
         $associate = User::firstOrCreate(
-            ['email' => 'associate@consultiser.com'],
+            ['email' => 'associate@example.com'],
             [
                 'name' => 'Team Associate',
                 'password' => Hash::make('assoc123'),
@@ -76,6 +76,6 @@ class ErpUserSeeder extends Seeder
         );
         $associate->roles()->sync([Role::where('name', 'team_associate')->first()->id]);
 
-        $this->command?->info('ERP users created: admin@consultiser.com / admin123');
+        $this->command?->info('ERP users created: admin@example.com / admin123');
     }
 }

@@ -69,11 +69,11 @@
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
                     <div>
                         <label class="ks-form-label">From Address</label>
-                        <input type="email" name="from_address" value="{{ old('from_address', $emailSetting->from_address) }}" required class="ks-form-input" placeholder="noreply@consultiser.com">
+                        <input type="email" name="from_address" value="{{ old('from_address', $emailSetting->from_address) }}" required class="ks-form-input" placeholder="noreply@example.com">
                     </div>
                     <div>
                         <label class="ks-form-label">From Name</label>
-                        <input type="text" name="from_name" value="{{ old('from_name', $emailSetting->from_name) }}" required class="ks-form-input" placeholder="Consultiser ERP">
+                        <input type="text" name="from_name" value="{{ old('from_name', $emailSetting->from_name) }}" required class="ks-form-input" placeholder="ARS ERP Finance Software">
                     </div>
                 </div>
 
@@ -113,7 +113,7 @@
                 <li>Go to <strong>myaccount.google.com</strong> → Security</li>
                 <li>Enable <strong>2-Step Verification</strong> (required)</li>
                 <li>Go to <strong>App passwords</strong> (search in Google Account)</li>
-                <li>Select <strong>Mail</strong> and <strong>Other (Custom name)</strong> → name it "Consultiser ERP"</li>
+                <li>Select <strong>Mail</strong> and <strong>Other (Custom name)</strong> → name it "ARS ERP Finance Software"</li>
                 <li>Copy the <strong>16-character password</strong> and paste it above</li>
             </ol>
         </div>

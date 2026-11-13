@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Erp;
 use App\Http\Controllers\Controller;
 use App\Models\LoginAttempt;
 use App\Models\SecurityEvent;
+use App\Models\User;
 use App\Services\AuditService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +43,7 @@ class AuthController extends Controller
 
         $request->validate(['code' => ['required', 'string', 'size:6']]);
 
-        $user = \App\Models\User::find($userId);
+        $user = User::find($userId);
         if (! $user || ! $user->two_factor_enabled) {
             return redirect()->route('erp.login');
         }
@@ -117,10 +118,11 @@ class AuthController extends Controller
         $throttleKey = 'login:'.$request->ip().':'.$credentials['email'];
         if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
             $seconds = RateLimiter::availableIn($throttleKey);
+
             return back()->withErrors(['email' => 'Too many attempts. Try again in '.ceil($seconds / 60).' minute(s).']);
         }
 
-        $user = \App\Models\User::where('email', $credentials['email'])->first();
+        $user = User::where('email', $credentials['email'])->first();
 
         // Log the attempt
         LoginAttempt::create([
@@ -131,11 +133,13 @@ class AuthController extends Controller
 
         if (! $user || ! $user->is_active) {
             RateLimiter::hit($throttleKey, 60);
+
             return back()->withErrors(['email' => 'Invalid credentials or account deactivated.']);
         }
 
         if (! Auth::attempt($credentials, $request->boolean('remember'))) {
             RateLimiter::hit($throttleKey, 60);
+
             return back()->withErrors(['email' => 'Invalid credentials.']);
         }
 
@@ -154,7 +158,7 @@ class AuthController extends Controller
 
             // Send the code via email
             try {
-                \Illuminate\Support\Facades\Mail::raw("Your Consultiser ERP verification code: {$code}\n\nThis code expires in 10 minutes.", function ($message) use ($user): void {
+                Mail::raw("Your ARS ERP Finance Software verification code: {$code}\n\nThis code expires in 10 minutes.", function ($message) use ($user): void {
                     $message->to($user->email, $user->name)
                         ->subject('2FA Verification Code');
                 });
@@ -224,12 +228,12 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-        if (! \Illuminate\Support\Facades\Hash::check($request->current_password, $user->password)) {
+        if (! Hash::check($request->current_password, $user->password)) {
             return back()->withErrors(['current_password' => 'Current password is incorrect.']);
         }
 
         $user->update([
-            'password' => \Illuminate\Support\Facades\Hash::make($request->password),
+            'password' => Hash::make($request->password),
             'must_change_password' => false,
         ]);
 
@@ -284,7 +288,7 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
         ]);
 
-        $user = \App\Models\User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
 
         if ($user) {
             $token = Str::random(64);
@@ -301,16 +305,16 @@ class AuthController extends Controller
 
             try {
                 Mail::raw(
-                    "Hello {$user->name},\n\n" .
-                    "You requested a password reset for your Consultiser ERP account.\n\n" .
-                    "Click the link below to reset your password:\n\n" .
-                    "{$resetUrl}\n\n" .
-                    "This link will expire in 60 minutes.\n\n" .
-                    "If you did not request this, please ignore this email.\n\n" .
-                    "— Consultiser ERP Team",
+                    "Hello {$user->name},\n\n".
+                    "You requested a password reset for your ARS ERP Finance Software account.\n\n".
+                    "Click the link below to reset your password:\n\n".
+                    "{$resetUrl}\n\n".
+                    "This link will expire in 60 minutes.\n\n".
+                    "If you did not request this, please ignore this email.\n\n".
+                    '— ARS ERP Finance Software Team',
                     function ($message) use ($user): void {
                         $message->to($user->email, $user->name)
-                            ->subject('Password Reset Request — Consultiser ERP');
+                            ->subject('Password Reset Request — ARS ERP Finance Software');
                     }
                 );
             } catch (\Throwable $e) {
@@ -349,7 +353,7 @@ class AuthController extends Controller
             return back()->withErrors(['email' => 'Reset token has expired. Please request a new one.']);
         }
 
-        $user = \App\Models\User::where('email', $request->email)->firstOrFail();
+        $user = User::where('email', $request->email)->firstOrFail();
 
         $user->update([
             'password' => Hash::make($request->password),

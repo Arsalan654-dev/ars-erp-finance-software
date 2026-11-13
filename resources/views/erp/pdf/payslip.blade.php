@@ -5,13 +5,13 @@
 <title>Payslip {{ $payroll->period }}</title>
 <style>
  body { font-family: 'DejaVu Sans', sans-serif; color: #1f2937; font-size: 13px; }
- .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid #C91F32; padding-bottom: 16px; margin-bottom: 20px; }
- .brand { font-size: 20px; font-weight: bold; color: #C91F32; }
+ .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid #0B1F3A; padding-bottom: 16px; margin-bottom: 20px; }
+ .brand { font-size: 20px; font-weight: bold; color: #0B1F3A; }
  .meta { text-align: right; font-size: 12px; }
  h2 { color: #374151; margin: 0 0 4px 0; }
  .info-box { display: flex; justify-content: space-between; margin-bottom: 24px; font-size: 12px; }
  table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
- th { background: #FEE3D6; color: #C91F32; text-align: left; padding: 8px; font-size: 11px; text-transform: uppercase; }
+ th { background: #FEE3D6; color: #0B1F3A; text-align: left; padding: 8px; font-size: 11px; text-transform: uppercase; }
  td { padding: 8px; border-bottom: 1px solid #e5e7eb; }
  .right { text-align: right; }
  .amount-box { background: #f0fdf4; border: 2px solid #16a34a; border-radius: 8px; padding: 16px; text-align: center; margin-bottom: 20px; }
@@ -23,7 +23,7 @@
 <body>
 <div class="header">
  <div>
- <div class="brand">Consultiser</div>
+ <div class="brand">ARS ERP</div>
  <div style="font-size:11px; color:#6b7280;">Tax &amp; Compliance Services</div>
  </div>
  <div class="meta">
@@ -56,7 +56,7 @@
 <table>
  <tr><td>Gross Amount</td><td class="right">{{ number_format($payroll->gross_amount, 2) }} {{ $payroll->currency }}</td></tr>
  <tr><td>Deductions</td><td class="right">- {{ number_format($payroll->deductions ?? 0, 2) }} {{ $payroll->currency }}</td></tr>
- <tr style="font-weight:bold; border-top:2px solid #C91F32;"><td>Net Pay</td><td class="right">{{ number_format($payroll->net_amount, 2) }} {{ $payroll->currency }}</td></tr>
+ <tr style="font-weight:bold; border-top:2px solid #0B1F3A;"><td>Net Pay</td><td class="right">{{ number_format($payroll->net_amount, 2) }} {{ $payroll->currency }}</td></tr>
 </table>
 
 @if($payroll->notes)
@@ -64,7 +64,7 @@
 @endif
 
 <div class="footer">
- This is a computer-generated payslip from Consultiser ERP.
+ This is a computer-generated payslip from ARS ERP Finance Software.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 return [
 
-    'app_name' => env('APP_NAME', 'Consultiser ERP'),
+    'app_name' => env('APP_NAME', 'ARS ERP Finance Software'),
 
     /*
     |--------------------------------------------------------------------------
@@ -104,7 +104,7 @@ return [
     */
     'whatsapp' => [
         'enabled' => env('WHATSAPP_ENABLED', false),
-        'verify_token' => env('WHATSAPP_VERIFY_TOKEN', 'consultiser-verify'),
+        'verify_token' => env('WHATSAPP_VERIFY_TOKEN', 'ars-erp-verify'),
     ],
 
     /*

@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="{{ asset('erp-assets/consultisor-logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('erp-assets/ars-erp-icon.png') }}">
     <link rel="stylesheet" href="{{ asset('erp-assets/kanakku-theme.css') }}?v=1">
     <script src="{{ asset('erp-assets/tailwind.js') }}?v=2"></script>
     <script>
@@ -17,11 +17,11 @@
                 extend: {
                     colors: {
                         brand: {
-                            crimson: '#A91E3B',
-                            red: '#C91F32',
-                            coral: '#F43F1E',
-                            orange: '#FF6A1A',
-                            amber: '#FF9D18',
+                            crimson: '#0B1F3A',
+                            red: '#0B1F3A',
+                            coral: '#10B981',
+                            orange: '#059669',
+                            amber: '#F59E0B',
                         },
                         ink: { DEFAULT: '#111111', light: '#151515', lighter: '#181818' },
                         paper: { DEFAULT: '#F8F8F7', alt: '#FAFAF9' },
@@ -38,13 +38,13 @@
     <style>
         /* ===== Default role theme variables (admin brand) — auth pages ===== */
         :root {
-            --role-grad-1: #C91F32;
-            --role-grad-2: #F43F1E;
-            --role-grad-3: #FF6A1A;
-            --role-grad-4: #FF9D18;
-            --role-accent: #F43F1E;
-            --role-accent-strong: #C91F32;
-            --role-accent-soft: rgba(244,63,30,0.14);
+            --role-grad-1: #0B1F3A;
+            --role-grad-2: #10B981;
+            --role-grad-3: #059669;
+            --role-grad-4: #F59E0B;
+            --role-accent: #10B981;
+            --role-accent-strong: #0B1F3A;
+            --role-accent-soft: rgba(16,185,129,0.14);
         }
         /* Role-aware accent utilities */
         .role-text { color: var(--role-accent); }
@@ -190,10 +190,10 @@
     {{-- Pre-loader Skeleton --}}
     <div id="app-preloader">
         <div class="preloader-logo">
-            <img alt="Consultiser" class="w-full h-full object-contain" src="{{ asset('erp-assets/consultisor-logo.png') }}"/>
+            <img alt="ARS ERP Finance Software" class="w-full h-full object-contain" src="{{ asset('erp-assets/ars-erp-icon.png') }}"/>
         </div>
         <div class="text-center">
-            <div class="preloader-brand">Consultiser <span class="consultiser-gradient-text">ERP</span></div>
+            <div class="preloader-brand">ARS ERP <span class="consultiser-gradient-text">Finance Software</span></div>
             <div class="text-[11px] text-white/30 mt-1 tracking-widest uppercase">Loading…</div>
         </div>
         <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>

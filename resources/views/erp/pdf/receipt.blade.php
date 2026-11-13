@@ -5,8 +5,8 @@
 <title>Payment Receipt {{ $payment->payment_number }}</title>
 <style>
  body { font-family: 'DejaVu Sans', sans-serif; color: #1f2937; font-size: 13px; }
- .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid #F43F1E; padding-bottom: 16px; margin-bottom: 20px; }
- .brand { font-size: 20px; font-weight: bold; color: #C91F32; }
+ .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid #10B981; padding-bottom: 16px; margin-bottom: 20px; }
+ .brand { font-size: 20px; font-weight: bold; color: #0B1F3A; }
  .meta { text-align: right; font-size: 12px; }
  h2 { color: #374151; margin: 0 0 4px 0; }
  .info-box { display: flex; justify-content: space-between; margin-bottom: 24px; font-size: 12px; }
@@ -23,7 +23,7 @@
 <body>
 <div class="header">
  <div>
- <div class="brand">Consultiser</div>
+ <div class="brand">ARS ERP</div>
  <div style="font-size:11px; color:#6b7280;">Tax &amp; Compliance Services</div>
  </div>
  <div class="meta">
@@ -65,7 +65,7 @@
 @endif
 
 <div class="footer">
- This is a computer-generated receipt from Consultiser ERP. Thank you for your business.
+ This is a computer-generated receipt from ARS ERP Finance Software. Thank you for your business.
 </div>
 </body>
 </html>

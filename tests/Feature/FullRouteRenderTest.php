@@ -116,7 +116,7 @@ class FullRouteRenderTest extends TestCase
 
     // ===== AUTH =====
     public function test_login_page(): void { $this->get('/erp/login')->assertOk(); }
-    public function test_login_submit(): void { $this->post('/erp/login', ['email' => 'admin@consultiser.com', 'password' => 'admin123'])->assertRedirect(); }
+    public function test_login_submit(): void { $this->post('/erp/login', ['email' => 'admin@example.com', 'password' => 'admin123'])->assertRedirect(); }
     public function test_logout(): void { $this->actingAs($this->admin)->post('/erp/logout')->assertRedirect(); }
 
     // ===== DASHBOARD =====

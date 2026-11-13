@@ -6,9 +6,9 @@
  <div class="relative z-10 w-full" style="max-width:420px;">
   <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:32px;">
    <div class="consultiser-gradient" style="width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;padding:8px;border:1px solid rgba(255,255,255,0.1);">
-    <img alt="Consultiser" class="w-full h-full object-contain" src="{{ asset('erp-assets/consultisor-logo.png') }}"/>
+    <img alt="ARS ERP Finance Software" class="w-full h-full object-contain" src="{{ asset('erp-assets/ars-erp-icon.png') }}"/>
    </div>
-   <span style="font-size:20px;font-weight:700;color:#fff;letter-spacing:-0.02em;">Consultiser <span class="consultiser-gradient-text">ERP</span></span>
+   <span style="font-size:20px;font-weight:700;color:#fff;letter-spacing:-0.02em;">ARS ERP <span class="consultiser-gradient-text">Finance Software</span></span>
   </div>
 
   <div class="ks-card" style="border-radius:16px;padding:32px;border:1px solid rgba(255,255,255,0.1);background:#fff;">
