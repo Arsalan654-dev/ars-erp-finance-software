@@ -29,3 +29,5 @@ yarn-error.log
 !/storage/framework/views/.gitignore
 /storage/app/*
 !/storage/app/.gitignore
+.vercel
+.env*
