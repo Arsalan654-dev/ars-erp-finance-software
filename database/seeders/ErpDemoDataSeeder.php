@@ -40,6 +40,12 @@ class ErpDemoDataSeeder extends Seeder
 {
     public function run(): void
     {
+        $seedPassword = env('ERP_SEED_PASSWORD');
+
+        if (! is_string($seedPassword) || $seedPassword === '') {
+            throw new \RuntimeException('Set ERP_SEED_PASSWORD in the environment before seeding ERP demo data.');
+        }
+
         $this->command?->info('Seeding comprehensive demo data...');
 
         // ──────────────────────────────────────────────
@@ -54,11 +60,11 @@ class ErpDemoDataSeeder extends Seeder
         ];
 
         $extraUsers = [
-            ['name' => 'Senior HR Officer', 'email' => 'hr2@example.com', 'password' => 'hr12345', 'phone' => '+1-555-0201', 'department' => 'Human Resources', 'designation' => 'Senior HR Officer', 'role' => 'hr'],
-            ['name' => 'Accounts Executive', 'email' => 'finance2@example.com', 'password' => 'finance123', 'phone' => '+1-555-0202', 'department' => 'Finance', 'designation' => 'Accounts Executive', 'role' => 'finance'],
-            ['name' => 'Operations Lead', 'email' => 'csr2@example.com', 'password' => 'csr12345', 'phone' => '+1-555-0203', 'department' => 'Operations', 'designation' => 'Operations Lead', 'role' => 'csr_manager'],
-            ['name' => 'US Tax Associate', 'email' => 'associate2@example.com', 'password' => 'assoc123', 'phone' => '+1-555-0204', 'department' => 'US TAX', 'designation' => 'US Tax Associate', 'role' => 'team_associate'],
-            ['name' => 'UK Tax Associate', 'email' => 'associate3@example.com', 'password' => 'assoc123', 'phone' => '+1-555-0205', 'department' => 'UK TAX', 'designation' => 'UK Tax Associate', 'role' => 'team_associate'],
+            ['name' => 'Senior HR Officer', 'email' => 'hr2@example.com', 'password' => $seedPassword, 'phone' => '+1-555-0201', 'department' => 'Human Resources', 'designation' => 'Senior HR Officer', 'role' => 'hr'],
+            ['name' => 'Accounts Executive', 'email' => 'finance2@example.com', 'password' => $seedPassword, 'phone' => '+1-555-0202', 'department' => 'Finance', 'designation' => 'Accounts Executive', 'role' => 'finance'],
+            ['name' => 'Operations Lead', 'email' => 'csr2@example.com', 'password' => $seedPassword, 'phone' => '+1-555-0203', 'department' => 'Operations', 'designation' => 'Operations Lead', 'role' => 'csr_manager'],
+            ['name' => 'US Tax Associate', 'email' => 'associate2@example.com', 'password' => $seedPassword, 'phone' => '+1-555-0204', 'department' => 'US TAX', 'designation' => 'US Tax Associate', 'role' => 'team_associate'],
+            ['name' => 'UK Tax Associate', 'email' => 'associate3@example.com', 'password' => $seedPassword, 'phone' => '+1-555-0205', 'department' => 'UK TAX', 'designation' => 'UK Tax Associate', 'role' => 'team_associate'],
         ];
 
         foreach ($extraUsers as $u) {
@@ -614,18 +620,7 @@ class ErpDemoDataSeeder extends Seeder
         }
 
         $this->command->info('✅ Demo data seeded successfully!');
-        $this->command->info('');
-        $this->command->info('━━━ LOGIN CREDENTIALS ━━━');
-        $this->command->info('  Super Admin  →  admin@example.com      /  admin123');
-        $this->command->info('  HR Manager   →  hr@example.com         /  hr12345');
-        $this->command->info('  Finance      →  finance@example.com    /  finance123');
-        $this->command->info('  CSR Manager  →  csr@example.com        /  csr12345');
-        $this->command->info('  Associate    →  associate@example.com  /  assoc123');
-        $this->command->info('  HR (2nd)     →  hr2@example.com        /  hr12345');
-        $this->command->info('  Finance (2nd) → finance2@example.com   /  finance123');
-        $this->command->info('  CSR (2nd)    →  csr2@example.com       /  csr12345');
-        $this->command->info('  US Tax Asso  →  associate2@example.com /  assoc123');
-        $this->command->info('  UK Tax Asso  →  associate3@example.com /  assoc123');
+        $this->command->info('ERP users use the password from ERP_SEED_PASSWORD.');
         $this->command->info('');
         $this->command->info('Seeded: '.count($clients).' clients, 22 quotations, 22 invoices, 22 tasks, 22 compliance, 10 employees, 30 payroll records, 15 expenses, KPI + audit data.');
     }
