@@ -11,11 +11,17 @@ class ErpUserSeeder extends Seeder
 {
     public function run(): void
     {
+        $seedPassword = env('ERP_SEED_PASSWORD');
+
+        if (! is_string($seedPassword) || $seedPassword === '') {
+            throw new \RuntimeException('Set ERP_SEED_PASSWORD in the environment before seeding ERP users.');
+        }
+
         $admin = User::firstOrCreate(
             ['email' => 'admin@example.com'],
             [
                 'name' => 'Super Admin',
-                'password' => Hash::make('admin123'),
+                'password' => Hash::make($seedPassword),
                 'phone' => '+1-555-0100',
                 'department' => 'Management',
                 'designation' => 'System Administrator',
@@ -28,7 +34,7 @@ class ErpUserSeeder extends Seeder
             ['email' => 'hr@example.com'],
             [
                 'name' => 'HR Manager',
-                'password' => Hash::make('hr12345'),
+                'password' => Hash::make($seedPassword),
                 'phone' => '+1-555-0101',
                 'department' => 'Human Resources',
                 'designation' => 'HR Manager',
@@ -41,7 +47,7 @@ class ErpUserSeeder extends Seeder
             ['email' => 'finance@example.com'],
             [
                 'name' => 'Finance Officer',
-                'password' => Hash::make('finance123'),
+                'password' => Hash::make($seedPassword),
                 'phone' => '+1-555-0102',
                 'department' => 'Finance',
                 'designation' => 'Finance Officer',
@@ -54,7 +60,7 @@ class ErpUserSeeder extends Seeder
             ['email' => 'csr@example.com'],
             [
                 'name' => 'CSR Manager',
-                'password' => Hash::make('csr12345'),
+                'password' => Hash::make($seedPassword),
                 'phone' => '+1-555-0103',
                 'department' => 'Operations',
                 'designation' => 'CSR Manager',
@@ -67,7 +73,7 @@ class ErpUserSeeder extends Seeder
             ['email' => 'associate@example.com'],
             [
                 'name' => 'Team Associate',
-                'password' => Hash::make('assoc123'),
+                'password' => Hash::make($seedPassword),
                 'phone' => '+1-555-0104',
                 'department' => 'Operations',
                 'designation' => 'Team Associate',
@@ -76,6 +82,6 @@ class ErpUserSeeder extends Seeder
         );
         $associate->roles()->sync([Role::where('name', 'team_associate')->first()->id]);
 
-        $this->command?->info('ERP users created: admin@example.com / admin123');
+        $this->command?->info('ERP users created with the password from ERP_SEED_PASSWORD.');
     }
 }
